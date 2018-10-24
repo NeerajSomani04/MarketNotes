@@ -1,3 +1,11 @@
+Skills to include in Resume:
+JIRA for issue tracking purpose
+Code control Management: Subversion (SVN), Git/Github
+Job Scheduling: Tivoli, Control-M
+Scripting: Linux/Unix, SQL
+
+leading a team of 4 DE under Onsite/Off-shore model and while maintain strong interaction with Key stackholders located across Globe.
+
 Resume summary should include:
 
 Match the employer’s needs
