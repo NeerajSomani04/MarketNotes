@@ -2,12 +2,30 @@ Skills to include in Resume:
 JIRA for issue tracking purpose
 Code control Management: Subversion (SVN), Git/Github
 Job Scheduling: Tivoli, Control-M
-Scripting: Linux/Unix, SQL
 
-leading a team of 4 DE under Onsite/Off-shore model and while maintain strong interaction with Key stackholders located across Globe.
+Strength / key words for resume:
+Problem Solving skills
+strong interaction with Key stackholders located across Globe.
+Excellent analytical and critical thinking skills, with an ability to translate internal stakeholder needs into both business and technical requirements
+Strategic thinker who can see the big picture, and granular details as needed
+team player
+3rd party API integration
+Ability to maintain multiple projects, prioritize and communicate priorities between various stakeholders
+
+Job Responsibilities can be written in following words:
+Building and maintaining new and existing data pipelines
+Syncing/Replicating data events from various sources such as hadoop, kinesis, S3, and MySQL
+Gather requirements from Product teams, FP&A team and convert them into an ETL process
+Organizing and documenting data warehouse
+Improving efficiency and performance to ensure future growth
+Investigating new technologies to simplify and monitor the ETL architecture
+Ability to parse source code and understand when key application events are triggered
+Helping application developers implement best practices to capture proper key data points for future growth
+
+Strong problem solving and analytical skilss
+Expertise in dimensional data modeling, ETL, SQL coding plus working knowledge of Big Data solutions and noSQL databases
 
 Resume summary should include:
-
 Match the employer’s needs
 List achievements and skills
 Include measurable achievements
