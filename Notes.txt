@@ -1,3 +1,29 @@
+# Concentration --> by giving undivided attention to that specific thing or person. If you get distracted, bring it back immidiately.
+
+# Will power --> muscle / biceps of your mind. 
+How to build --> 
+1. finish what you begin,
+2. finish as per your expectation
+3. do little more than you think and little more than your expectation
+
+Awareness and Energy
+--> you control where your awareness goes.
+--> you control where your energy flows.
+
+----------------------------------------------------------------------------
+self - assement points -->
+Job Application -->
+Currently need to apply for ETL developer, Data Analyst, Business Analyst. 
+These application untill i feel confident in Data Structure and algorithms. 
+Also, make sure you are getting good opportunity in reputed company.
+
+Study --> Data Structure and algorithms
+
+Actual role --> Data Engineer
+Long term --> Data Engineer / Scientist with ML/AI experties
+
+---------------------------------------------------------------
+
 Skills to include in Resume:
 JIRA for issue tracking purpose
 Code control Management: Subversion (SVN), Git/Github
