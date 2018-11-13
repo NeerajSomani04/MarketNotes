@@ -1,3 +1,12 @@
+About you example
+Bullet #1 (Ideal Job): I am interested in being an individual contributor on a small engineering team that has a strong data focus. 
+
+Bullet #2 (Something Impressive): Successfully migrated a legacy monolithic web application with 10k+ daily users to a microservice architecture while maintaining 99.99% uptime 
+
+Bullet #3 (Something Impressive): Developed and architected financial dashboard that tracks ETF and mutual fund investments for 50,000 users.
+
+
+
 # Concentration --> by giving undivided attention to that specific thing or person. If you get distracted, bring it back immidiately.
 
 # Will power --> muscle / biceps of your mind. 
