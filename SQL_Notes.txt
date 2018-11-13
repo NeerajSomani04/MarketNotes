@@ -1,0 +1,12 @@
+from HackerRank exercises:
+
+Usage of RegExp and how it works:
+
+if u write ''^[aeiou]|[aeiou]$', it will check only start letter vowel or end letter vowel like abcdfsd, efdsf, osdf(staring one vowel), dsfa, dsde, fghfgo(ending one vowel)
+
+if u remove the pipeline, '^[aeiou][aeiou]$' it will check only start letter vowel end letter vowel and nothing between them
+
+if u write '^[aeiou].[aeiou]$'; adding one dot means start letter vowel or end letter vowel and any one char between them
+
+if u write '^[aeiou].*[aeiou]$'; adding one * means start letter vowel or end letter vowel and any one character repeated 0 or more than 0
+
