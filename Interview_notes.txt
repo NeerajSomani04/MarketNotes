@@ -1,5 +1,7 @@
 From Slalom:-
-Need to explain, lots of SQL, SFDC, cloud Integration, Informatica, ETL flows, Data Analysis, AWS, 
+Need to explain, lots of SQL, SFDC, cloud API Integration, Informatica, ETL flows, Data Analysis, AWS, 
+
+for Slalom --> lots of SQL, ETL concepts, MDM/Data hub, cloud RestAPI concepts
 
 from Google Interview:
 mostly BI and reporting role, need to explain SQL logics, MS office experience, ETL and cloud data integration experience
