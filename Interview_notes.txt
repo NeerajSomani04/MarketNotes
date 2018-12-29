@@ -1,8 +1,0 @@
-From Slalom:-
-lots of SQL, SFDC, cloud API Integration, Informatica, ETL flows/concepts, Data Analysis, AWS, MDM/Data hub
-
-from Google Interview:
-mostly BI and reporting role, need to explain SQL logics, MS office experience, ETL and cloud data integration experience
-
-Goldman Sachs:-
-mostly java and sql, high level concepts
