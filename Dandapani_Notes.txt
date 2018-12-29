@@ -1,0 +1,24 @@
+Dandapani's points --> 
+
+# Concentration --> by giving undivided attention to that specific thing or person. If you get distracted, bring it back immidiately.
+
+# Will power --> muscle / biceps of your mind. 
+How to build --> 
+1. finish what you begin,
+2. finish as per your expectation
+3. do little more than you think and little more than your expectation
+
+Awareness and Energy
+--> you control where your awareness goes.
+--> you control where your energy flows.
+
+----------------------------------------------------------------------------
+Job Responsibilities can be written in following words:
+Syncing/Replicating data events from various sources such as hadoop, kinesis, S3, and MySQL
+Gather requirements from Product teams, FP&A team and convert them into an ETL process
+Improving efficiency and performance to ensure future growth
+Investigating new technologies to simplify and monitor the ETL architecture
+Ability to parse source code and understand when key application events are triggered
+Helping application developers implement best practices to capture proper key data points for future growth
+
+
