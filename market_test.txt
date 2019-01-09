@@ -1,0 +1,162 @@
+to connect to mysql --> mysql -u retail_user -h nn01.itversity.com -p itversity
+              to see available databases --> show databases;
+              to connect to db --> use retail_db;
+              to see tables --> show tables;
+              
+              http://discuss.itversity.com/t/mysql-database-to-create-table/10463/2
+              
+         2 tables -->
+         CREATE TABLE dkothari_loan (
+  loan_id INT NOT NULL,
+  merchant_id INT NOT NULL,
+  product_type VARCHAR(50) NOT NULL, -- A loan is either a Line of Credit or Term loan product
+  loan_funded_date DATE NOT NULL,
+  loan_amount NUMERIC,
+  PRIMARY KEY (loan_id),
+  FOREIGN KEY (merchant_id) REFERENCES dkothari_merchant(merchant_id)
+);
+
+CREATE TABLE dkothari_merchant (merchant_id INT NOT NULL, country_name VARCHAR(1000) NOT NULL, PRIMARY KEY (merchant_id));
+
+---- show tables like '%dkothari%';
+--- insert statements for dkothari_merchant table ----
+INSERT INTO dkothari_merchant VALUES (1, 'INDIA'); -- this merchant has 2 loans on the same day
+INSERT INTO dkothari_merchant VALUES (2, 'USA'); -- this merchant has 0 loans
+INSERT INTO dkothari_merchant VALUES (3, 'China'); -- this merchant has 1 loan at a specific day
+INSERT INTO dkothari_merchant VALUES (4, 'INDIA');
+INSERT INTO dkothari_merchant VALUES (5, 'USA');
+INSERT INTO dkothari_merchant VALUES (6, 'China');
+INSERT INTO dkothari_merchant VALUES (7, 'INDIA');
+INSERT INTO dkothari_merchant VALUES (8, 'INDIA');
+INSERT INTO dkothari_merchant VALUES (9, 'USA');
+INSERT INTO dkothari_merchant VALUES (10, 'China');
+INSERT INTO dkothari_merchant VALUES (11, 'INDIA');
+INSERT INTO dkothari_merchant VALUES (12, 'USA');
+INSERT INTO dkothari_merchant VALUES (13, 'China');
+INSERT INTO dkothari_merchant VALUES (14, 'INDIA');
+INSERT INTO dkothari_merchant VALUES (15, 'USA');
+INSERT INTO dkothari_merchant VALUES (16, 'China');
+INSERT INTO dkothari_merchant VALUES (17, 'INDIA');
+INSERT INTO dkothari_merchant VALUES (18, 'USA');
+INSERT INTO dkothari_merchant VALUES (19, 'China');
+INSERT INTO dkothari_merchant VALUES (20, 'INDIA');
+INSERT INTO dkothari_merchant VALUES (21, 'USA');
+INSERT INTO dkothari_merchant VALUES (22, 'China');
+
+
+--- insert statements for dkothari_loan table ---- 
+INSERT INTO dkothari_loan VALUES (111, 1, 'Line of Credit', '2018-01-23', 100.00); 
+INSERT INTO dkothari_loan VALUES (112, 1, 'Term loan product','2018-01-23', 100.00); 
+INSERT INTO dkothari_loan VALUES (113, 3, 'Line of Credit', '2018-02-23', 100.00); 
+INSERT INTO dkothari_loan VALUES (114, 4, 'Term loan product', '2018-03-31', 100.00);
+INSERT INTO dkothari_loan VALUES (115, 7, 'Line of Credit', '2018-04-01', 100.00);
+INSERT INTO dkothari_loan VALUES (116, 1, 'Line of Credit', '2018-01-07', 100.00);
+INSERT INTO dkothari_loan VALUES (117, 6, 'Line of Credit', '2018-02-24', 100.00); 
+INSERT INTO dkothari_loan VALUES (118, 9, 'Line of Credit', '2018-02-20', 100.00); 
+INSERT INTO dkothari_loan VALUES (119, 10, 'Term loan product', '2018-03-20', 100.00); 
+INSERT INTO dkothari_loan VALUES (120, 13, 'Term loan product', '2018-02-11', 100.00); 
+
+
+
+
+----- probable solution for 1st question --
+Assumption:- Same merchant can apply for similar product_type loan multiple times. However, this will not impact calculation strategy. 
+
+
+
+1. select temp.country_name from (select A.country_name, CONCAT(YEAR(B.loan_funded_date),'-Q',QUARTER(B.loan_funded_date)) as year_qtr, sum(B.loan_amount) as highest_volume_loan
+from dkothari_merchant A join dkothari_loan B 
+on A.merchant_id = B.merchant_id
+group by A.country_name, year_qtr
+having year_qtr = '2018-Q1'
+order by highest_volume_loan desc) as temp limit 1;
+
+If we want to get list of all the countries with the highest volume (based on loan_amount) of loans funded in 2018Q1, means if two or more countries having ties than we can use below SQL to get that list of countries.
+
+select temp.country_name, rank() over(partition by temp.highest_volume_loan) rank_country from (select A.country_name, CONCAT(YEAR(B.loan_funded_date),'-Q',QUARTER(B.loan_funded_date)) as year_qtr, sum(B.loan_amount) as highest_volume_loan
+from dkothari_merchant A join dkothari_loan B 
+on A.merchant_id = B.merchant_id
+group by A.country_name, year_qtr
+having year_qtr = '2018-Q1'
+order by highest_volume_loan desc) as temp;
+
+
+SELECT maker 
+FROM (
+SELECT maker, RANK() OVER(PARTITION BY maker ORDER BY model) rnk
+FROM Product 
+WHERE type = 'PC'
+) Ranked_makers
+WHERE rnk = 3;
+
+select *, rank() over(partition by temp.highest_volume_loan order by temp.country_name) rank_country from (select A.country_name, CONCAT(YEAR(B.loan_funded_date),'-Q',QUARTER(B.loan_funded_date)) as year_qtr, sum(B.loan_amount) as highest_volume_loan
+from dkothari_merchant A join dkothari_loan B 
+on A.merchant_id = B.merchant_id
+group by A.country_name, year_qtr
+having year_qtr = '2018-Q1'
+order by highest_volume_loan desc) as temp;
+
+
+2. select distinct A.merchant_id, B.product_type 
+from dkothari_merchant A left outer join dkothari_loan B
+on A.merchant_id=B.merchant_id
+order by A.merchant_id;
+
+Assumption 1 --> we want to print the list of merchant with there respective type of products taken in the past.
+
+
+Assumption 2 --> we want to get the count and type together.
+
+select temp.merchant_id, temp.product_type, count(*) OVER (PARTITION BY temp.merchant_id) as count_products_type 
+from 
+(select distinct A.merchant_id, IFNULL(B.product_type, 'NONE')
+from dkothari_merchant A left outer join dkothari_loan B
+on A.merchant_id=B.merchant_id
+order by A.merchant_id) as temp;
+
+select temp.merchant_id, count(*) OVER (PARTITION BY temp.merchant_id) as count_products_type 
+from (select distinct A.merchant_id
+from dkothari_merchant A left outer join dkothari_loan B
+on A.merchant_id=B.merchant_id
+order by A.merchant_id) as temp;
+
+
+select merchant_id, count(product_type) OVER (PARTITION BY merchant_id) as count_products_type  from dkothari_loan;
+
+Assumption 3 --> One merchant can get same type of loan multiple times with-in same year without any restriction.
+
+----- section 2 of test -------
+CREATE TABLE dkothari_funding_source_stg (funding_source_id INT NOT NULL, funding_source_name VARCHAR(1000) NOT NULL, Checksum_value VARCHAR(1000) NOT NULL, PRIMARY KEY (funding_source_id) );
+
+CREATE TABLE dkothari_loan_stg (
+  loan_id INT NOT NULL,
+  current_funding_source_id INT NOT NULL,   -- Funding source can change in a loan’s life.
+  loan_amount NUMERIC,  -- Loan amount won’t change in a loan’s life.
+  last_modified_date DATE,
+  Checksum_value VARCHAR(1000) NOT NULL, -- column value gets generated by using checksum function like MD5.
+  PRIMARY KEY (loan_id),
+  FOREIGN KEY (current_funding_source_id) REFERENCES dkothari_funding_source_stg(funding_source_id)
+);
+
+
+
+Insert into loan values (1001, 1, 100, '2018-12-27'); 
+Insert into funding_source_stg values (1, 'CITI Bank', 'gkhkj1322gjgkkui'); 
+
+delete from loan_stg where loan_id = 1001;
+
+Insert into loan_stg values (1001, 1, 100, '2018-12-27', 'ghgkj1223368jhjghj'); 
+
+Insert into dim_funding_source values (111, 1, 'CITI Bank', '2018-12-26', '2018-12-31', 'I');
+Insert into dim_funding_source values (112, 2, 'Bank Of America', '2018-12-26', '2018-12-31', 'I');
+
+delete from fact_loan where seq_id = 1111;
+Insert into fact_loan values (1111, 1001, 112, 2, 100, '2018-12-26', '2018-12-26', '2018-12-27', 'I'); 
+Insert into fact_loan values (1112, 1001, 111, 1, 100, '2018-12-27', '2018-12-27', '2018-12-31', 'U'); 
+
+select * from loan;
+select * from funding_source;
+select * from loan_stg;
+select * from funding_source_stg;
+select * from dim_funding_source;
+select * from fact_loan;
